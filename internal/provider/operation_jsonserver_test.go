@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-testing/knownvalue"
 	"github.com/hashicorp/terraform-plugin-testing/statecheck"
 	"github.com/hashicorp/terraform-plugin-testing/tfjsonpath"
-	"github.com/magodo/terraform-provider-restful/internal/acceptance"
+	"github.com/aztfmod/opentofu-provider-restful/internal/acceptance"
 )
 
 type jsonServerOperation struct {
@@ -162,7 +162,7 @@ func TestOperation_JSONServer_MigrateV0ToV1(t *testing.T) {
 				ExternalProviders: map[string]resource.ExternalProvider{
 					"restful": {
 						VersionConstraint: "= 0.13.2",
-						Source:            "registry.terraform.io/magodo/restful",
+						Source:            "registry.terraform.io/aztfmod/restful",
 					},
 				},
 				Config: d.migrate_v0(),

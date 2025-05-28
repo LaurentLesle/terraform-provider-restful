@@ -24,9 +24,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"github.com/magodo/terraform-provider-restful/internal/client"
-	"github.com/magodo/terraform-provider-restful/internal/defaults"
-	myvalidator "github.com/magodo/terraform-provider-restful/internal/validator"
+	"github.com/aztfmod/opentofu-provider-restful/internal/client"
+	"github.com/aztfmod/opentofu-provider-restful/internal/defaults"
+	myvalidator "github.com/aztfmod/opentofu-provider-restful/internal/validator"
 )
 
 var _ provider.Provider = &Provider{}
@@ -179,8 +179,8 @@ func (*Provider) EphemeralResources(context.Context) []func() ephemeral.Ephemera
 
 func (*Provider) Schema(ctx context.Context, req provider.SchemaRequest, resp *provider.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		Description:         "The restful provider provides resource and data source to interact with a platform that exposes a restful API.",
-		MarkdownDescription: "The restful provider provides resource and data source to interact with a platform that exposes a restful API.",
+		Description:         "The restful provider provides resource and data source to interact with a platform that exposes a restful API. Compatible with both Terraform and OpenTofu.",
+		MarkdownDescription: "The restful provider provides resource and data source to interact with a platform that exposes a restful API. Compatible with both Terraform and OpenTofu.",
 		Attributes: map[string]schema.Attribute{
 			"base_url": schema.StringAttribute{
 				Description:         "The base URL of the API provider.",

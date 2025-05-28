@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"github.com/magodo/terraform-provider-restful/internal/dynamic"
+	"github.com/aztfmod/opentofu-provider-restful/internal/dynamic"
 )
 
 type ephemeralResourcePrivateData struct {

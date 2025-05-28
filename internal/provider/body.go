@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/magodo/terraform-provider-restful/internal/attrpath"
+	"github.com/aztfmod/opentofu-provider-restful/internal/attrpath"
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
 )

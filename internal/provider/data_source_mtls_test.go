@@ -17,7 +17,7 @@ import (
 	"time"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
-	"github.com/magodo/terraform-provider-restful/internal/acceptance"
+	"github.com/aztfmod/opentofu-provider-restful/internal/acceptance"
 	"github.com/stretchr/testify/require"
 )
 

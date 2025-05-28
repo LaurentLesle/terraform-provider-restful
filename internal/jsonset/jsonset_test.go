@@ -3,7 +3,7 @@ package jsonset_test
 import (
 	"testing"
 
-	"github.com/magodo/terraform-provider-restful/internal/jsonset"
+	"github.com/aztfmod/opentofu-provider-restful/internal/jsonset"
 	"github.com/stretchr/testify/require"
 )
 

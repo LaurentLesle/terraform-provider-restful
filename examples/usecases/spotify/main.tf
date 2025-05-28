@@ -5,7 +5,7 @@ variable "token" {
 terraform {
   required_providers {
     restful = {
-      source = "magodo/restful"
+      source = "aztfmod/restful"
     }
   }
 }

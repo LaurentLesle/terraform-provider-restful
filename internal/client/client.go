@@ -12,8 +12,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"github.com/magodo/terraform-provider-restful/internal/dynamic"
-	"github.com/magodo/terraform-provider-restful/internal/exparam"
+	"github.com/aztfmod/opentofu-provider-restful/internal/dynamic"
+	"github.com/aztfmod/opentofu-provider-restful/internal/exparam"
 	"golang.org/x/net/publicsuffix"
 )
 

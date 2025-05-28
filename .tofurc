@@ -1,0 +1,6 @@
+provider_installation {
+  dev_overrides {
+    "registry.opentofu.org/aztfmod/restful" = "/workspaces/terraform-provider-restful"
+  }
+  direct {}
+}

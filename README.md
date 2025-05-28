@@ -1,8 +1,10 @@
-# Terraform Provider Restful
+# Terraform/OpenTofu Provider Restful
 
-This is a general Terraform provider aims to work for any platform as long as it exposes a RESTful API.
+This is a general Terraform and OpenTofu provider that aims to work for any platform as long as it exposes a RESTful API.
 
-The document of this provider is available on [Terraform Provider Registry](https://registry.terraform.io/providers/magodo/restful/latest/docs).
+The document of this provider is available on:
+- [Terraform Provider Registry](https://registry.terraform.io/providers/aztfmod/restful/latest/docs)
+- [OpenTofu Provider Registry](https://registry.opentofu.org/providers/aztfmod/restful/latest/docs)
 
 ## Features
 
@@ -15,11 +17,19 @@ The document of this provider is available on [Terraform Provider Registry](http
 - Ephemeral resource `restful_resource`
 - [Write-only attributes](https://developer.hashicorp.com/terraform/plugin/framework/resources/write-only-arguments) supported
 
+## Compatibility
+
+This provider is fully compatible with both:
+- **Terraform** - The original infrastructure as code tool
+- **OpenTofu** - The open-source fork of Terraform
+
+The provider works identically with both tools and supports all the same features.
+
 ## Why
 
-Given there already exists platform oriented, first-class providers, why do I create this? The reason is that most providers today are manually maintained, which means some latest features are likely not available in these first-class providers. For this case, `terraform-provider-restful` can be used as your escape hatch.
+Given there already exists platform oriented, first-class providers, why do I create this? The reason is that most providers today are manually maintained, which means some latest features are likely not available in these first-class providers. For this case, `terraform-provider-restful` (or `opentofu-provider-restful`) can be used as your escape hatch.
 
-Another common use case is that the platform you are currently working on do not have a Terraform provider yet. In this case, you can use `terraform-provider-restful` to manage the resources for that platform.
+Another common use case is that the platform you are currently working on do not have a Terraform/OpenTofu provider yet. In this case, you can use this provider to manage the resources for that platform.
 
 ## Requirement
 
@@ -33,4 +43,4 @@ Another common use case is that the platform you are currently working on do not
 - The API content type is `application/json`
 - The resource should have a unique identifier (e.g. `/foos/foo1`).
 
-Regarding the users, as `terraform-provider-restful` is essentially just a terraform-wrapped API client, practitioners have to know the details of the API for the target platform quite well.
+Regarding the users, as this provider is essentially just a terraform/opentofu-wrapped API client, practitioners have to know the details of the API for the target platform quite well.

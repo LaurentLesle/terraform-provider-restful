@@ -3,12 +3,14 @@
 page_title: "restful Provider"
 subcategory: ""
 description: |-
-  The restful provider provides resource and data source to interact with a platform that exposes a restful API.
+  The restful provider provides resource and data source to interact with a platform that exposes a restful API. Compatible with both Terraform and OpenTofu.
 ---
 
 # restful Provider
 
 The restful provider provides resource and data source to interact with a platform that exposes a restful API.
+
+**Compatibility:** This provider is fully compatible with both Terraform and OpenTofu.
 
 ## Example Usage
 

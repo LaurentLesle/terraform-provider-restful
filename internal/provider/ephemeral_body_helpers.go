@@ -6,8 +6,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/magodo/terraform-provider-restful/internal/dynamic"
-	"github.com/magodo/terraform-provider-restful/internal/jsonset"
+	"github.com/aztfmod/opentofu-provider-restful/internal/dynamic"
+	"github.com/aztfmod/opentofu-provider-restful/internal/jsonset"
 )
 
 // validateEphemeralBody validates a known, non-null ephemeral_body doesn't joint with the body.

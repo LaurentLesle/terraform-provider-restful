@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 
 	"github.com/hashicorp/terraform-plugin-framework/diag"
-	"github.com/magodo/terraform-provider-restful/internal/jsonset"
+	"github.com/aztfmod/opentofu-provider-restful/internal/jsonset"
 )
 
 const (
