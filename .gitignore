@@ -2,3 +2,7 @@ cfg
 .vscode
 terraform.tfstate*
 ./terraform
+.tofurc
+.terraformrc
+opentofu-provider-restful
+bin

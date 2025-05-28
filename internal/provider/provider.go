@@ -10,6 +10,9 @@ import (
 	"sync"
 	"time"
 
+	"github.com/aztfmod/opentofu-provider-restful/internal/client"
+	"github.com/aztfmod/opentofu-provider-restful/internal/defaults"
+	myvalidator "github.com/aztfmod/opentofu-provider-restful/internal/validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/objectvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
@@ -17,6 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/ephemeral"
+	"github.com/hashicorp/terraform-plugin-framework/function"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
@@ -24,9 +28,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
-	"github.com/aztfmod/opentofu-provider-restful/internal/client"
-	"github.com/aztfmod/opentofu-provider-restful/internal/defaults"
-	myvalidator "github.com/aztfmod/opentofu-provider-restful/internal/validator"
 )
 
 var _ provider.Provider = &Provider{}
@@ -173,6 +174,14 @@ func (*Provider) EphemeralResources(context.Context) []func() ephemeral.Ephemera
 	return []func() ephemeral.EphemeralResource{
 		func() ephemeral.EphemeralResource {
 			return &EphemeralResource{}
+		},
+	}
+}
+
+func (*Provider) Functions(context.Context) []func() function.Function {
+	return []func() function.Function{
+		func() function.Function {
+			return &nameFunction{}
 		},
 	}
 }

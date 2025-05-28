@@ -12,7 +12,7 @@ The provider is available on the OpenTofu provider registry:
 terraform {
   required_providers {
     restful = {
-      source = "magodo/restful"
+      source = "aztfmod/restful"
       version = "~> 1.0"
     }
   }
@@ -22,8 +22,8 @@ terraform {
 ### Registry Configuration
 
 For OpenTofu, the provider is available at:
-- OpenTofu Registry: `registry.opentofu.org/magodo/restful`
-- Terraform Registry: `registry.terraform.io/magodo/restful` (also works with OpenTofu)
+- OpenTofu Registry: `registry.opentofu.org/aztfmod/restful`
+- Terraform Registry: `registry.terraform.io/aztfmod/restful` (also works with OpenTofu)
 
 ## Migration from Terraform
 
@@ -34,7 +34,7 @@ If you're migrating an existing Terraform configuration to OpenTofu, no changes 
 terraform {
   required_providers {
     restful = {
-      source = "magodo/restful"
+      source = "aztfmod/restful"
     }
   }
 }
@@ -57,7 +57,7 @@ provider "restful" {
 terraform {
   required_providers {
     restful = {
-      source = "magodo/restful"
+      source = "aztfmod/restful"
     }
   }
 }

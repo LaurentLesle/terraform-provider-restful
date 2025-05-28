@@ -9,7 +9,7 @@ terraform {
   }
 }
 
-// This should be the URL of the thingsbaord-api-proxy (see: https://github.com/magodo/thingsboard-api-proxy), e.g. http://localhost:12345/api
+// This should be the URL of the thingsbaord-api-proxy (see: https://github.com/aztfmod/thingsboard-api-proxy), e.g. http://localhost:12345/api
 variable "base_url" {
   type    = string
   default = "http://0.0.0.0:12345/api"

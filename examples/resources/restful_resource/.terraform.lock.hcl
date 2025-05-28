@@ -1,7 +1,7 @@
 # This file is maintained automatically by "tofu init".
 # Manual edits may be lost in future updates.
 
-provider "registry.opentofu.org/magodo/restful" {
+provider "registry.opentofu.org/aztfmod/restful" {
   version = "0.21.0"
   hashes = [
     "h1:gwXIxfq4f/L1XwP/5FylZOmsHEi+D7HF/tLS87WRRcc=",

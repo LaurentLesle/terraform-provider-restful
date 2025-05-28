@@ -18,7 +18,7 @@ The restful provider provides resource and data source to interact with a platfo
 terraform {
   required_providers {
     restful = {
-      source = "magodo/restful"
+      source = "aztfmod/restful"
     }
   }
 }

@@ -5,7 +5,7 @@
 echo "Updating import paths..."
 
 # Find all Go files and update the module import paths
-find . -name "*.go" -type f -exec sed -i 's|github.com/magodo/terraform-provider-restful|github.com/magodo/opentofu-provider-restful|g' {} \;
+find . -name "*.go" -type f -exec sed -i 's|github.com/aztfmod/terraform-provider-restful|github.com/aztfmod/opentofu-provider-restful|g' {} \;
 
 echo "Import paths updated successfully!"
 
