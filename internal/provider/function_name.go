@@ -25,8 +25,55 @@ func (f nameFunction) Metadata(ctx context.Context, req function.MetadataRequest
 // Definition defines the function's parameters and return type
 func (f nameFunction) Definition(ctx context.Context, req function.DefinitionRequest, resp *function.DefinitionResponse) {
 	resp.Definition = function.Definition{
-		Summary:             "Generate standardized Azure resource names",
-		MarkdownDescription: "Generates standardized Azure resource names based on Azure Cloud Adoption Framework naming conventions. This implements functionality similar to azurecaf_name from the terraform-provider-azurecaf. Supports both singular (prefix, suffix) and plural (prefixes, suffixes) parameter names for flexibility.",
+		Summary: "Generate standardized Azure resource names",
+		MarkdownDescription: `Generates standardized Azure resource names based on Azure Cloud Adoption Framework naming conventions. 
+
+This function implements functionality similar to azurecaf_name from the terraform-provider-azurecaf. It supports both singular (prefix, suffix) and plural (prefixes, suffixes) parameter names for flexibility.
+
+## Supported Attributes
+
+**Required:**
+- ` + "`name`" + ` - The base name for the resource
+- ` + "`resource_type`" + ` - The Azure resource type (e.g., 'azurerm_resource_group', 'azurerm_storage_account')
+
+**Optional:**
+- ` + "`prefix`" + ` / ` + "`prefixes`" + ` - Single prefix string or array of prefixes to prepend
+- ` + "`suffix`" + ` / ` + "`suffixes`" + ` - Single suffix string or array of suffixes to append  
+- ` + "`separator`" + ` - Character(s) used to separate name components (default: "-")
+- ` + "`clean_input`" + ` - Whether to clean input strings according to resource rules (default: true)
+- ` + "`use_slug`" + ` - Whether to include the resource type slug in the name (default: true)
+- ` + "`passthrough`" + ` - Whether to skip processing and return the name as-is (default: false)
+- ` + "`random_length`" + ` - Length of random suffix to append (default: 0, no random suffix)
+
+## Examples
+
+**Simple Example:**
+` + "```hcl" + `
+output "rg_name" {
+  value = provider::restful::name({
+    name          = "myproject"
+    resource_type = "azurerm_resource_group"
+  })
+  # Result: "rg-myproject"
+}
+` + "```" + `
+
+**Advanced Example:**
+` + "```hcl" + `
+output "storage_name" {
+  value = provider::restful::name({
+    name          = "data"
+    resource_type = "azurerm_storage_account"
+    prefixes      = ["prod", "team1"]
+    suffixes      = ["001", "cache"]
+    separator     = ""
+    random_length = 3
+  })
+  # Result: "prodteam1stdatacache001r96"
+}
+` + "```" + `
+
+The function validates all input attributes and will return an error for any unauthorized attributes.`,
 		Parameters: []function.Parameter{
 			function.DynamicParameter{
 				Name:                "settings",
