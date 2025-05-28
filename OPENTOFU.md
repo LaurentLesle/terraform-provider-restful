@@ -92,7 +92,7 @@ All features of the provider are fully supported in OpenTofu:
 
 ## Examples
 
-See the `examples-opentofu/` directory for OpenTofu-specific examples, though the configurations are identical to the Terraform examples in the `examples/` directory.
+See the `examples/` directory.
 
 ## State Migration
 
