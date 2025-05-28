@@ -156,6 +156,9 @@ func (*Provider) DataSources(context.Context) []func() datasource.DataSource {
 		func() datasource.DataSource {
 			return &DataSource{}
 		},
+		func() datasource.DataSource {
+			return &DataSourceName{}
+		},
 	}
 }
 

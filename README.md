@@ -44,3 +44,51 @@ Another common use case is that the platform you are currently working on do not
 - The resource should have a unique identifier (e.g. `/foos/foo1`).
 
 Regarding the users, as this provider is essentially just a terraform/opentofu-wrapped API client, practitioners have to know the details of the API for the target platform quite well.
+
+## Azure Resource Naming Support
+
+The provider includes a `restful_name` data source that generates standardized Azure resource names based on Azure Cloud Adoption Framework naming conventions. This functionality is similar to the `azurecaf_name` data source from terraform-provider-azurecaf.
+
+### Example Usage
+
+```hcl
+data "restful_name" "example" {
+  name          = "myapp"
+  resource_type = "azurerm_resource_group"
+  prefixes      = ["prod", "eastus"]
+  suffixes      = ["web"]
+  random_length = 4
+}
+
+output "resource_group_name" {
+  value = data.restful_name.example.result
+  # Output: prod-eastus-rg-myapp-web-abc1
+}
+```
+
+### Supported Azure Resource Types
+
+The provider supports over 350 Azure resource types with their respective naming conventions. Here are some commonly used ones:
+
+| Resource Type | Slug | Min Length | Max Length | Dashes | Lowercase | Example |
+|---------------|------|------------|------------|---------|-----------|---------|
+| azurerm_resource_group | `rg` | 1 | 90 | ✓ | ✗ | `prod-rg-myapp` |
+| azurerm_storage_account | `st` | 3 | 24 | ✗ | ✓ | `prodstmyapp1234` |
+| azurerm_virtual_network | `vnet` | 2 | 64 | ✓ | ✗ | `prod-vnet-myapp` |
+| azurerm_subnet | `snet` | 1 | 80 | ✓ | ✗ | `prod-snet-myapp` |
+| azurerm_network_security_group | `nsg` | 1 | 80 | ✓ | ✗ | `prod-nsg-myapp` |
+| azurerm_public_ip | `pip` | 1 | 80 | ✓ | ✗ | `prod-pip-myapp` |
+| azurerm_virtual_machine | `vm` | 1 | 15 | ✓ | ✗ | `prod-vm-myapp` |
+| azurerm_kubernetes_cluster | `aks` | 1 | 63 | ✓ | ✗ | `prod-aks-myapp` |
+| azurerm_key_vault | `kv` | 3 | 24 | ✓ | ✗ | `prod-kv-myapp` |
+| azurerm_log_analytics_workspace | `log` | 4 | 63 | ✓ | ✗ | `prod-log-myapp` |
+
+For the complete list of supported resource types, see [RESOURCE_TYPES.md](RESOURCE_TYPES.md).
+
+### Features
+
+- **Comprehensive Coverage**: Over 350 Azure resource types supported
+- **Validation**: Automatic validation against Azure naming rules
+- **Flexibility**: Support for prefixes, suffixes, and random suffixes
+- **Compliant**: Follows Azure Cloud Adoption Framework guidelines
+- **Embedded**: Resource definitions are embedded in the provider binary

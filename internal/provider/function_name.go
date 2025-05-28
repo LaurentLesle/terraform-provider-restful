@@ -214,7 +214,7 @@ func (f nameFunction) Run(ctx context.Context, req function.RunRequest, resp *fu
 	}
 
 	// Generate the resource name
-	opts := nameOptions{
+	opts := NamingOptions{
 		Name:         name,
 		ResourceType: resourceType,
 		Prefixes:     prefixes,
@@ -224,9 +224,10 @@ func (f nameFunction) Run(ctx context.Context, req function.RunRequest, resp *fu
 		UseSlug:      useSlug,
 		Passthrough:  passthrough,
 		RandomLength: randomLength,
+		RandomSeed:   42, // Fixed seed for deterministic results
 	}
 
-	generatedName, err := generateName(opts)
+	generatedName, err := GenerateResourceName(opts)
 	if err != nil {
 		resp.Error = function.NewFuncError(fmt.Sprintf("Error generating name: %s", err.Error()))
 		return
@@ -275,110 +276,4 @@ func extractStringArray(attrs map[string]attr.Value, singularKey, pluralKey stri
 	return result
 }
 
-// nameOptions holds the options for name generation
-type nameOptions struct {
-	Name         string
-	ResourceType string
-	Prefixes     []string
-	Suffixes     []string
-	RandomLength int
-	RandomSeed   int64
-	Separator    string
-	CleanInput   bool
-	Passthrough  bool
-	UseSlug      bool
-}
 
-// generateName generates a resource name using the same logic as the data source
-func generateName(opts nameOptions) (string, error) {
-	// Get resource definition using existing function from data source
-	resourceDef, err := getResourceDefinition(opts.ResourceType)
-	if err != nil {
-		return "", err
-	}
-
-	// Handle passthrough mode
-	if opts.Passthrough {
-		result := opts.Name
-		if opts.CleanInput {
-			result = cleanString(result, resourceDef)
-		}
-		if err := validateResourceName(result, resourceDef); err != nil {
-			return "", err
-		}
-		return result, nil
-	}
-
-	// Build name components
-	var components []string
-
-	// Add prefixes
-	for _, prefix := range opts.Prefixes {
-		if opts.CleanInput {
-			prefix = cleanString(prefix, resourceDef)
-		}
-		if prefix != "" {
-			components = append(components, prefix)
-		}
-	}
-
-	// Add resource slug if enabled
-	if opts.UseSlug && resourceDef.Slug != "" {
-		components = append(components, resourceDef.Slug)
-	}
-
-	// Add base name
-	if opts.Name != "" {
-		name := opts.Name
-		if opts.CleanInput {
-			name = cleanString(name, resourceDef)
-		}
-		components = append(components, name)
-	}
-
-	// Add suffixes
-	for _, suffix := range opts.Suffixes {
-		if opts.CleanInput {
-			suffix = cleanString(suffix, resourceDef)
-		}
-		if suffix != "" {
-			components = append(components, suffix)
-		}
-	}
-
-	// Add random suffix if needed
-	if opts.RandomLength > 0 {
-		seed := opts.RandomSeed
-		if seed == 0 {
-			seed = 42 // Default seed for deterministic results in functions
-		}
-		randomSuffix := generateRandomString(opts.RandomLength, seed)
-		components = append(components, randomSuffix)
-	}
-
-	// Join components
-	result := ""
-	if len(components) > 0 {
-		result = components[0]
-		for i := 1; i < len(components); i++ {
-			result += opts.Separator + components[i]
-		}
-	}
-
-	// Apply case transformation
-	if resourceDef.LowerCase {
-		result = strings.ToLower(result)
-	}
-
-	// Trim to max length
-	if len(result) > resourceDef.MaxLength {
-		result = result[:resourceDef.MaxLength]
-	}
-
-	// Validate the result
-	if err := validateResourceName(result, resourceDef); err != nil {
-		return "", err
-	}
-
-	return result, nil
-}

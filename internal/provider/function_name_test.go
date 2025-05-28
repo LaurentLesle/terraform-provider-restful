@@ -245,6 +245,16 @@ func TestNameFunction_Run(t *testing.T) {
 			inputJSON: `{"name": "myapp", "resource_type": "azurerm_storage_account", "random_length": 3, "separator": ""}`,
 			expected:  "stmyappr96",
 		},
+		{
+			name:      "truncate long storage account name",
+			inputJSON: `{"name": "myverylongapplicationname", "resource_type": "azurerm_storage_account", "prefixes": ["prod", "eastus"], "suffixes": ["logs"], "random_length": 4, "separator": ""}`,
+			expected:  "prodeastusstmyverylongap", // Should be truncated to 24 chars
+		},
+		{
+			name:      "truncate long resource group name",
+			inputJSON: `{"name": "averylongresourcegroupnamethatwillexceedthemaximumlengthof90characterslimitwhenaddedwithprefixesandsuffixes", "resource_type": "azurerm_resource_group", "suffixes": ["environment", "production"], "separator": "-"}`,
+			expected:  "rg-averylongresourcegroupnamethatwillexceedthemaximumlengthof90characterslimitwhenaddedwit", // Should be truncated to 90 chars
+		},
 	}
 
 	for _, tt := range tests {
