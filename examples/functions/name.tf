@@ -1,4 +1,4 @@
-# Example: Using the name function
+# Example: Using the name function for Azure resource naming
 
 terraform {
   required_providers {
@@ -9,7 +9,7 @@ terraform {
 }
 
 provider "restful" {
-  base_url = "https://api.example.com"
+  base_url = "https://api.example.com"  # Required but not used for functions
 }
 
 # === SIMPLE EXAMPLES ===
@@ -41,13 +41,13 @@ output "simple_storage_name" {
 output "storage_account_name" {
   description = "Generated storage account name with suffixes"
   value = provider::restful::name({
-    name          = "myapp"
+    name          = "webapp"
     resource_type = "azurerm_storage_account"
-    suffixes      = ["001"]
+    prefixes      = ["dev", "east"]
+    suffixes      = ["01"]
     separator     = ""
-    use_slug      = true
   })
-  # Result: "stmyapp001"
+  # Result: "deveaststwebapp01"
 }
 
 # Resource group with prefix, suffix, and random component
@@ -62,7 +62,7 @@ output "resource_group_name" {
       passthrough   = false
       use_slug      = true
   })
-  # Result: "dev-rg-myproject-001-r96"
+  # Result: "dev-rg-myproject-001-abc"
 }
 
 # Multiple prefixes and suffixes
@@ -76,6 +76,18 @@ output "complex_storage_name" {
     separator     = ""
   })
   # Result: "prodteam1stdatacache001"
+}
+
+# Virtual machine naming
+output "vm_name" {
+  description = "Virtual machine name with prefix"
+  value = provider::restful::name({
+    name          = "worker"
+    resource_type = "azurerm_linux_virtual_machine"
+    prefix        = "dev"
+    clean_input   = true
+  })
+  # Result: "dev-vm-worker"
 }
 
 # Custom separator example
@@ -100,5 +112,52 @@ output "passthrough_name" {
     passthrough   = true
   })
   # Result: "MyCustomName"
+}
+
+# Random suffix example
+output "random_storage_name" {
+  description = "Storage account with random suffix"
+  value = provider::restful::name({
+    name          = "myapp"
+    resource_type = "azurerm_storage_account"
+    random_length = 3
+    separator     = ""
+  })
+  # Result: "stmyappbsz" (random suffix will vary with seed)
+}
+
+# Azure AD B2C Directory example
+output "aad_b2c_name" {
+  description = "Azure AD B2C Directory name"
+  value = provider::restful::name({
+    name          = "aad"
+    resource_type = "azurerm_aadb2c_directory"
+    random_length = 3
+  })
+  # Result: "aad-bsz" (with random suffix)
+}
+
+# === TESTING DIFFERENT CONFIGURATIONS ===
+
+# Test with slug disabled
+output "no_slug_name" {
+  description = "Resource group name without slug"
+  value = provider::restful::name({
+    name          = "test"
+    resource_type = "azurerm_resource_group"
+    use_slug      = false
+  })
+  # Result: "test"
+}
+
+# Test with clean input disabled
+output "no_clean_name" {
+  description = "Name with valid characters (clean_input disabled)"
+  value = provider::restful::name({
+    name          = "my-app-123"
+    resource_type = "azurerm_resource_group"
+    clean_input   = false
+  })
+  # Result: "rg-my-app-123" (valid, no cleaning needed)
 }
 

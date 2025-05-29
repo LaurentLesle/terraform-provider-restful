@@ -1,6 +1,0 @@
-provider_installation {
-  dev_overrides {
-    "aztfmod/restful" = "/workspaces/terraform-provider-restful/bin"
-  }
-  direct {}
-}
