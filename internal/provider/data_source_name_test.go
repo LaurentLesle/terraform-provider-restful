@@ -4,10 +4,10 @@ import (
 	"regexp"
 	"testing"
 
+	"github.com/aztfmod/opentofu-provider-restful/internal/provider"
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov6"
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
-	"github.com/aztfmod/opentofu-provider-restful/internal/provider"
 )
 
 // Simple provider factory for testing just the restful provider

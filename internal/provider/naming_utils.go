@@ -175,7 +175,7 @@ func ValidateResourceName(name string, resourceDef *ResourceDefinition) error {
 		pattern = strings.ReplaceAll(pattern, `\\`, `\`)
 		// Fix the ?* issue by replacing it with literal characters in character classes
 		pattern = strings.ReplaceAll(pattern, "?*", `\?\*`)
-		
+
 		regex, err := regexp.Compile(pattern)
 		if err != nil {
 			// If regex compilation still fails, skip validation but warn

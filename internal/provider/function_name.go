@@ -275,5 +275,3 @@ func extractStringArray(attrs map[string]attr.Value, singularKey, pluralKey stri
 
 	return result
 }
-
-

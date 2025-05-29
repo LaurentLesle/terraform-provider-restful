@@ -49,7 +49,7 @@ func getResourceDefinitions() (map[string]ResourceDefinition, error) {
 		if err != nil {
 			return
 		}
-		
+
 		// Transform to use resource type names as keys
 		resourceDefinitionCache = make(map[string]ResourceDefinition)
 		for _, def := range rawData {
@@ -58,11 +58,11 @@ func getResourceDefinitions() (map[string]ResourceDefinition, error) {
 			}
 		}
 	})
-	
+
 	if err != nil {
 		return nil, fmt.Errorf("failed to parse resource definitions: %w", err)
 	}
-	
+
 	return resourceDefinitionCache, nil
 }
 
@@ -77,6 +77,6 @@ func GetSupportedResourceTypes() ([]string, error) {
 	for resourceType := range definitions {
 		resourceTypes = append(resourceTypes, resourceType)
 	}
-	
+
 	return resourceTypes, nil
 }
