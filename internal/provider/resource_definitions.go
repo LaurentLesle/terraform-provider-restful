@@ -43,20 +43,8 @@ func getResourceDefinition(resourceType string) (*ResourceDefinition, error) {
 func getResourceDefinitions() (map[string]ResourceDefinition, error) {
 	var err error
 	cacheOnce.Do(func() {
-		// First unmarshal the JSON into a map with numeric keys
-		var rawData map[string]ResourceDefinition
-		err = json.Unmarshal(ResourceDefinitionsJSON, &rawData)
-		if err != nil {
-			return
-		}
-
-		// Transform to use resource type names as keys
-		resourceDefinitionCache = make(map[string]ResourceDefinition)
-		for _, def := range rawData {
-			if def.Name != "" {
-				resourceDefinitionCache[def.Name] = def
-			}
-		}
+		// Directly unmarshal the JSON since it now uses resource names as keys
+		err = json.Unmarshal(ResourceDefinitionsJSON, &resourceDefinitionCache)
 	})
 
 	if err != nil {
