@@ -67,6 +67,52 @@ data "restful_name" "passthrough_example" {
   clean_input = true
 }
 
+# Examples for newly added Azure resources
+
+# Generate a Container App Job name
+data "restful_name" "container_app_job_example" {
+  name          = "worker"
+  resource_type = "azurerm_container_app_job"
+  prefixes      = ["dev"]
+  clean_input   = true
+}
+
+# Generate a Grafana instance name
+data "restful_name" "grafana_example" {
+  name          = "monitoring"
+  resource_type = "azurerm_grafana"
+  prefixes      = ["prod", "eastus"]
+  suffixes      = ["dashboard"]
+  clean_input   = true
+}
+
+# Generate a Linux Function App name
+data "restful_name" "linux_function_app_example" {
+  name          = "processor"
+  resource_type = "azurerm_linux_function_app"
+  prefixes      = ["dev"]
+  random_length = 4
+  clean_input   = true
+}
+
+# Generate a Monitor Workspace name
+data "restful_name" "monitor_workspace_example" {
+  name          = "logs"
+  resource_type = "azurerm_monitor_workspace"
+  prefixes      = ["prod"]
+  suffixes      = ["workspace"]
+  clean_input   = true
+}
+
+# Generate a Windows Function App name
+data "restful_name" "windows_function_app_example" {
+  name          = "api"
+  resource_type = "azurerm_windows_function_app"
+  prefixes      = ["staging"]
+  random_length = 3
+  clean_input   = true
+}
+
 # Outputs to show the generated names
 output "resource_group_name" {
   value       = data.restful_name.rg_example.result
@@ -96,4 +142,29 @@ output "container_registry_name" {
 output "passthrough_name" {
   value       = data.restful_name.passthrough_example.result
   description = "Validated name using passthrough mode"
+}
+
+output "container_app_job_name" {
+  value       = data.restful_name.container_app_job_example.result
+  description = "Generated Container App Job name"
+}
+
+output "grafana_name" {
+  value       = data.restful_name.grafana_example.result
+  description = "Generated Grafana instance name"
+}
+
+output "linux_function_app_name" {
+  value       = data.restful_name.linux_function_app_example.result
+  description = "Generated Linux Function App name"
+}
+
+output "monitor_workspace_name" {
+  value       = data.restful_name.monitor_workspace_example.result
+  description = "Generated Monitor Workspace name"
+}
+
+output "windows_function_app_name" {
+  value       = data.restful_name.windows_function_app_example.result
+  description = "Generated Windows Function App name"
 }

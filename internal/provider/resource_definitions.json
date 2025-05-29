@@ -703,6 +703,17 @@
     "slug": "cae",
     "validation_regex": "\"^[0-9A-Za-z][0-9A-Za-z-]{0,58}[0-9a-zA-Z]$\""
   },
+  "azurerm_container_app_job": {
+    "dashes": true,
+    "lowercase": true,
+    "max_length": 32,
+    "min_length": 1,
+    "name": "azurerm_container_app_job",
+    "regex": "\"[^a-z0-9-]\"",
+    "scope": "resourceGroup",
+    "slug": "cajob",
+    "validation_regex": "\"^[a-z0-9][a-z0-9-]{0,30}[a-z0-9]$\""
+  },
   "azurerm_container_registry": {
     "dashes": false,
     "lowercase": true,
@@ -1484,6 +1495,17 @@
     "slug": "fas",
     "validation_regex": "\"^[0-9A-Za-z][0-9A-Za-z-]{0,57}[0-9a-zA-Z]$\""
   },
+  "azurerm_grafana": {
+    "dashes": true,
+    "lowercase": false,
+    "max_length": 23,
+    "min_length": 2,
+    "name": "azurerm_grafana",
+    "regex": "\"[^a-zA-Z0-9-]\"",
+    "scope": "resourceGroup",
+    "slug": "graf",
+    "validation_regex": "\"^[a-zA-Z][a-zA-Z0-9-]{0,21}[a-zA-Z0-9]$\""
+  },
   "azurerm_hdinsight_hadoop_cluster": {
     "dashes": true,
     "lowercase": false,
@@ -1957,6 +1979,17 @@
     "slug": "adt",
     "validation_regex": "\"^[a-zA-Z0-9_-]{1,63}$\""
   },
+  "azurerm_linux_function_app": {
+    "dashes": true,
+    "lowercase": false,
+    "max_length": 60,
+    "min_length": 2,
+    "name": "azurerm_linux_function_app",
+    "regex": "\"[^0-9A-Za-z-]\"",
+    "scope": "global",
+    "slug": "lfa",
+    "validation_regex": "\"^[0-9A-Za-z][0-9A-Za-z-]{0,58}[0-9a-zA-Z]$\""
+  },
   "azurerm_linux_virtual_machine": {
     "dashes": true,
     "lowercase": false,
@@ -2308,6 +2341,17 @@
     "scope": "resourceGroup",
     "slug": "schqra",
     "validation_regex": "\"^[^<>*%&:\\\\*/#{}]{0,259}[^<>*%&:\\\\*/#{}. ]$\""
+  },
+  "azurerm_monitor_workspace": {
+    "dashes": true,
+    "lowercase": false,
+    "max_length": 260,
+    "min_length": 1,
+    "name": "azurerm_monitor_workspace",
+    "regex": "\"[^a-zA-Z0-9-_]\"",
+    "scope": "resourceGroup",
+    "slug": "amws",
+    "validation_regex": "\"^[a-zA-Z0-9][a-zA-Z0-9-_]{0,258}[a-zA-Z0-9]$\""
   },
   "azurerm_mssql_database": {
     "dashes": true,
@@ -3859,6 +3903,17 @@
     "scope": "resourceGroup",
     "slug": "vmss",
     "validation_regex": "\"^[^\\\\/\\\"\\\\[\\\\]:|<>+=;,*@&_][^\\\\/\\\"\\\\[\\\\]:|<>+=;,*@&]{0,13}[^\\\\/\\\"\\\\[\\\\]:|<>+=;,*@&.-]$\""
+  },
+  "azurerm_windows_function_app": {
+    "dashes": true,
+    "lowercase": false,
+    "max_length": 60,
+    "min_length": 2,
+    "name": "azurerm_windows_function_app",
+    "regex": "\"[^0-9A-Za-z-]\"",
+    "scope": "global",
+    "slug": "wfa",
+    "validation_regex": "\"^[0-9A-Za-z][0-9A-Za-z-]{0,58}[0-9a-zA-Z]$\""
   },
   "azurerm_windows_web_app": {
     "dashes": true,
